@@ -321,6 +321,104 @@
     flex-shrink: 0;
   }
 
+  /* ── Notes Section ──────────────────────────────── */
+  .notes-section {
+    margin-top: 36px;
+    max-width: 640px;
+    width: 100%;
+    animation: fadeUp 0.5s 0.45s ease both;
+  }
+  .notes-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  }
+  .notes-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .notes-header .note-icon {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    background: var(--process-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .notes-header .note-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .note-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .note-bullet {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .note-bullet.old {
+    background: var(--trigger-bg);
+    color: var(--trigger);
+    border: 1px solid rgba(217,94,8,0.2);
+  }
+  .note-bullet.new {
+    background: var(--output-bg);
+    color: var(--output);
+    border: 1px solid rgba(4,120,87,0.2);
+  }
+  .note-bullet.info {
+    background: var(--source-bg);
+    color: var(--source);
+    border: 1px solid rgba(29,78,216,0.18);
+  }
+  .note-text {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .note-text .highlight {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  .highlight.old-hl {
+    background: var(--trigger-bg);
+    color: var(--trigger);
+  }
+  .highlight.new-hl {
+    background: var(--output-bg);
+    color: var(--output);
+  }
+  .highlight.info-hl {
+    background: var(--source-bg);
+    color: var(--source);
+  }
+
   @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -432,6 +530,42 @@
   <div class="legend-item"><div class="ldot" style="background:var(--output)"></div>Output</div>
   <div class="legend-item"><div class="ldot" style="background:var(--sender)"></div>Transport</div>
   <div class="legend-item"><div class="ldot" style="background:var(--dest)"></div>Destination</div>
+</div>
+
+<!-- Notes -->
+<div class="notes-section">
+  <div class="notes-card">
+    <div class="notes-header">
+      <div class="note-icon">📌</div>
+      <div class="note-title">Key Changes in v2.0</div>
+    </div>
+    <div class="notes-list">
+      <div class="note-item">
+        <div class="note-bullet old">1</div>
+        <div class="note-text">
+          The older version required a <span class="highlight old-hl">separate deployment for each pipeline</span> because it filtered stats based on server name.
+        </div>
+      </div>
+      <div class="note-item">
+        <div class="note-bullet new">2</div>
+        <div class="note-text">
+          The newer version handles all flows in a <span class="highlight new-hl">single deployment</span> by routing based on filename (<span class="highlight info-hl">CCF Nodes</span>) or Route value instead.
+        </div>
+      </div>
+      <div class="note-item">
+        <div class="note-bullet info">3</div>
+        <div class="note-text">
+          <span class="highlight info-hl">StatsCollector</span> stores all stats in one common directory.
+        </div>
+      </div>
+      <div class="note-item">
+        <div class="note-bullet info">4</div>
+        <div class="note-text">
+          The pipeline is identified by the <span class="highlight info-hl">CCF Node</span> or <span class="highlight info-hl">Route</span> value in the filename, and the corresponding report is generated accordingly.
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
